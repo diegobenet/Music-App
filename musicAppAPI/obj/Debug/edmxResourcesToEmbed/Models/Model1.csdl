@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="musicAppDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Agrupacion">
+    <Key>
+      <PropertyRef Name="Id_agrupacion" />
+    </Key>
+    <Property Name="Id_agrupacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Genero_musical" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Foto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Busca_integrantes" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AgrupacionesUsuarios" Relationship="Self.FK_Agrupaciones_usuarios_Agrupacion" FromRole="Agrupacion" ToRole="AgrupacionesUsuarios" />
+    <NavigationProperty Name="Post" Relationship="Self.FK_Post_Agrupacion" FromRole="Agrupacion" ToRole="Post" />
+    <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Agrupacion" FromRole="Agrupacion" ToRole="Solicitud" />
+  </EntityType>
+  <EntityType Name="AgrupacionesUsuarios">
+    <Key>
+      <PropertyRef Name="Id_agrupacionesUsuarios" />
+    </Key>
+    <Property Name="Id_agrupacionesUsuarios" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="Id_agrupacion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Agrupacion" Relationship="Self.FK_Agrupaciones_usuarios_Agrupacion" FromRole="AgrupacionesUsuarios" ToRole="Agrupacion" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Agrupaciones_usuarios_usuario" FromRole="AgrupacionesUsuarios" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="AgrupacionExterna">
+    <Key>
+      <PropertyRef Name="Id_agrupacion_externa" />
+    </Key>
+    <Property Name="Id_agrupacion_externa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha_inicio" Type="DateTime" Precision="3" />
+    <Property Name="Fecha_fin" Type="DateTime" Precision="3" />
+    <Property Name="Id_usuario" Type="Int32" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_AgrupacionExterna_Usuario" FromRole="AgrupacionExterna" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Comentario">
+    <Key>
+      <PropertyRef Name="Id_comentario" />
+    </Key>
+    <Property Name="Id_comentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Comentario1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Id_post" Type="Int32" />
+    <Property Name="Id_usuario" Type="Int32" />
+    <NavigationProperty Name="Post" Relationship="Self.FK_Comentario_Post" FromRole="Comentario" ToRole="Post" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Comentario_Usuario" FromRole="Comentario" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Follow">
+    <Key>
+      <PropertyRef Name="id_follows" />
+    </Key>
+    <Property Name="id_follows" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_follower" Type="Int32" />
+    <Property Name="Id_following" Type="Int32" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Follow_Usuario" FromRole="Follow" ToRole="Usuario" />
+    <NavigationProperty Name="Usuario1" Relationship="Self.FK_Follow_Usuario1" FromRole="Follow" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Like">
+    <Key>
+      <PropertyRef Name="Id_like" />
+    </Key>
+    <Property Name="Id_like" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_post" Type="Int32" Nullable="false" />
+    <Property Name="Id_usuario" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Post" Relationship="Self.FK_Like_Post" FromRole="Like" ToRole="Post" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Like_Usuario" FromRole="Like" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="Id_post" />
+    </Key>
+    <Property Name="Id_post" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Mensaje" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Archivo_mp3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Id_usuario" Type="Int32" />
+    <Property Name="Id_agrupacion" Type="Int32" />
+    <NavigationProperty Name="Agrupacion" Relationship="Self.FK_Post_Agrupacion" FromRole="Post" ToRole="Agrupacion" />
+    <NavigationProperty Name="Comentario" Relationship="Self.FK_Comentario_Post" FromRole="Post" ToRole="Comentario" />
+    <NavigationProperty Name="Like" Relationship="Self.FK_Like_Post" FromRole="Post" ToRole="Like" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Post_Usuario" FromRole="Post" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Solicitud">
+    <Key>
+      <PropertyRef Name="Id_usuario" />
+      <PropertyRef Name="Id_agrupacion" />
+    </Key>
+    <Property Name="Id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="Id_agrupacion" Type="Int32" Nullable="false" />
+    <Property Name="Estatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Agrupacion" Relationship="Self.FK_Solicitud_Agrupacion" FromRole="Solicitud" ToRole="Agrupacion" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Solicitud_Usuario" FromRole="Solicitud" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Token">
+    <Key>
+      <PropertyRef Name="Id_token" />
+    </Key>
+    <Property Name="Id_token" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Expiracion" Type="Int32" />
+    <Property Name="Id_usuario" Type="Int32" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Token_Usuario" FromRole="Token" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id_usuario" />
+    </Key>
+    <Property Name="Id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fecha_nac" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Genero" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Instrumentos_fav" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Genero_musical_fav" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Es_cantante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Estado_en_banda_concierto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Desc_personal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Foto_perfil" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AgrupacionesUsuarios" Relationship="Self.FK_Agrupaciones_usuarios_usuario" FromRole="Usuario" ToRole="AgrupacionesUsuarios" />
+    <NavigationProperty Name="AgrupacionExterna" Relationship="Self.FK_AgrupacionExterna_Usuario" FromRole="Usuario" ToRole="AgrupacionExterna" />
+    <NavigationProperty Name="Comentario" Relationship="Self.FK_Comentario_Usuario" FromRole="Usuario" ToRole="Comentario" />
+    <NavigationProperty Name="Follow" Relationship="Self.FK_Follow_Usuario" FromRole="Usuario" ToRole="Follow" />
+    <NavigationProperty Name="Follow1" Relationship="Self.FK_Follow_Usuario1" FromRole="Usuario" ToRole="Follow" />
+    <NavigationProperty Name="Like" Relationship="Self.FK_Like_Usuario" FromRole="Usuario" ToRole="Like" />
+    <NavigationProperty Name="Post" Relationship="Self.FK_Post_Usuario" FromRole="Usuario" ToRole="Post" />
+    <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Usuario" FromRole="Usuario" ToRole="Solicitud" />
+    <NavigationProperty Name="Token" Relationship="Self.FK_Token_Usuario" FromRole="Usuario" ToRole="Token" />
+  </EntityType>
+  <Association Name="FK_Agrupaciones_usuarios_Agrupacion">
+    <End Role="Agrupacion" Type="Self.Agrupacion" Multiplicity="1" />
+    <End Role="AgrupacionesUsuarios" Type="Self.AgrupacionesUsuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agrupacion">
+        <PropertyRef Name="Id_agrupacion" />
+      </Principal>
+      <Dependent Role="AgrupacionesUsuarios">
+        <PropertyRef Name="Id_agrupacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Post_Agrupacion">
+    <End Role="Agrupacion" Type="Self.Agrupacion" Multiplicity="0..1" />
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agrupacion">
+        <PropertyRef Name="Id_agrupacion" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="Id_agrupacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Solicitud_Agrupacion">
+    <End Role="Agrupacion" Type="Self.Agrupacion" Multiplicity="1" />
+    <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agrupacion">
+        <PropertyRef Name="Id_agrupacion" />
+      </Principal>
+      <Dependent Role="Solicitud">
+        <PropertyRef Name="Id_agrupacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Agrupaciones_usuarios_usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="AgrupacionesUsuarios" Type="Self.AgrupacionesUsuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="AgrupacionesUsuarios">
+        <PropertyRef Name="Id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AgrupacionExterna_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="AgrupacionExterna" Type="Self.AgrupacionExterna" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="AgrupacionExterna">
+        <PropertyRef Name="Id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comentario_Post">
+    <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+    <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="Id_post" />
+      </Principal>
+      <Dependent Role="Comentario">
+        <PropertyRef Name="Id_post" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comentario_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Comentario" Type="Self.Comentario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Comentario">
+        <PropertyRef Name="Id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Follow_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Follow">
+        <PropertyRef Name="Id_follower" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Follow_Usuario1">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Follow">
+        <PropertyRef Name="Id_following" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Like_Post">
+    <End Role="Post" Type="Self.Post" Multiplicity="1" />
+    <End Role="Like" Type="Self.Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="Id_post" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="Id_post" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Like_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Like" Type="Self.Like" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Like">
+        <PropertyRef Name="Id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Post_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Post" Type="Self.Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="Id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Solicitud_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Solicitud">
+        <PropertyRef Name="Id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Token_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Token" Type="Self.Token" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Token">
+        <PropertyRef Name="Id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="musicAppDBEntities8" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Agrupacion" EntityType="Self.Agrupacion" />
+    <EntitySet Name="AgrupacionesUsuarios" EntityType="Self.AgrupacionesUsuarios" />
+    <EntitySet Name="AgrupacionExterna" EntityType="Self.AgrupacionExterna" />
+    <EntitySet Name="Comentario" EntityType="Self.Comentario" />
+    <EntitySet Name="Follow" EntityType="Self.Follow" />
+    <EntitySet Name="Like" EntityType="Self.Like" />
+    <EntitySet Name="Post" EntityType="Self.Post" />
+    <EntitySet Name="Solicitud" EntityType="Self.Solicitud" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Token" EntityType="Self.Token" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK_Agrupaciones_usuarios_Agrupacion" Association="Self.FK_Agrupaciones_usuarios_Agrupacion">
+      <End Role="Agrupacion" EntitySet="Agrupacion" />
+      <End Role="AgrupacionesUsuarios" EntitySet="AgrupacionesUsuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Post_Agrupacion" Association="Self.FK_Post_Agrupacion">
+      <End Role="Agrupacion" EntitySet="Agrupacion" />
+      <End Role="Post" EntitySet="Post" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Solicitud_Agrupacion" Association="Self.FK_Solicitud_Agrupacion">
+      <End Role="Agrupacion" EntitySet="Agrupacion" />
+      <End Role="Solicitud" EntitySet="Solicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Agrupaciones_usuarios_usuario" Association="Self.FK_Agrupaciones_usuarios_usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="AgrupacionesUsuarios" EntitySet="AgrupacionesUsuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AgrupacionExterna_Usuario" Association="Self.FK_AgrupacionExterna_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="AgrupacionExterna" EntitySet="AgrupacionExterna" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comentario_Post" Association="Self.FK_Comentario_Post">
+      <End Role="Post" EntitySet="Post" />
+      <End Role="Comentario" EntitySet="Comentario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comentario_Usuario" Association="Self.FK_Comentario_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Comentario" EntitySet="Comentario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Follow_Usuario" Association="Self.FK_Follow_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Follow" EntitySet="Follow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Follow_Usuario1" Association="Self.FK_Follow_Usuario1">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Follow" EntitySet="Follow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Like_Post" Association="Self.FK_Like_Post">
+      <End Role="Post" EntitySet="Post" />
+      <End Role="Like" EntitySet="Like" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Like_Usuario" Association="Self.FK_Like_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Like" EntitySet="Like" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Post_Usuario" Association="Self.FK_Post_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Post" EntitySet="Post" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Solicitud_Usuario" Association="Self.FK_Solicitud_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Solicitud" EntitySet="Solicitud" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Token_Usuario" Association="Self.FK_Token_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Token" EntitySet="Token" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

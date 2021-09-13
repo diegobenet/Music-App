@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="feaa9a23a1074d1c985383add1c6e997" Name="Diagram1">
+        <EntityTypeShape EntityType="musicAppDBModel.Agrupacion" Width="1.5" PointX="3.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="musicAppDBModel.AgrupacionesUsuarios" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="musicAppDBModel.AgrupacionExterna" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="musicAppDBModel.Comentario" Width="1.5" PointX="6" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="musicAppDBModel.Follow" Width="1.5" PointX="3" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="musicAppDBModel.Like" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="musicAppDBModel.Post" Width="1.5" PointX="6" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="musicAppDBModel.Solicitud" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="musicAppDBModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="musicAppDBModel.Token" Width="1.5" PointX="3" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="musicAppDBModel.Usuario" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <AssociationConnector Association="musicAppDBModel.FK_Agrupaciones_usuarios_Agrupacion" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_Post_Agrupacion" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_Solicitud_Agrupacion" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_Agrupaciones_usuarios_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_AgrupacionExterna_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_Comentario_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_Comentario_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_Follow_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_Follow_Usuario1" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_Like_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_Like_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_Post_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_Solicitud_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="musicAppDBModel.FK_Token_Usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

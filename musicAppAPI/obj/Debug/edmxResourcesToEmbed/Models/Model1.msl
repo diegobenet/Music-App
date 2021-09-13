@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="musicAppDBModelStoreContainer" CdmEntityContainer="musicAppDBEntities8">
+    <EntitySetMapping Name="Agrupacion">
+      <EntityTypeMapping TypeName="musicAppDBModel.Agrupacion">
+        <MappingFragment StoreEntitySet="Agrupacion">
+          <ScalarProperty Name="Id_agrupacion" ColumnName="Id_agrupacion" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Genero_musical" ColumnName="Genero_musical" />
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
+          <ScalarProperty Name="Busca_integrantes" ColumnName="Busca_integrantes" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AgrupacionesUsuarios">
+      <EntityTypeMapping TypeName="musicAppDBModel.AgrupacionesUsuarios">
+        <MappingFragment StoreEntitySet="AgrupacionesUsuarios">
+          <ScalarProperty Name="Id_agrupacionesUsuarios" ColumnName="Id_agrupacionesUsuarios" />
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Id_agrupacion" ColumnName="Id_agrupacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AgrupacionExterna">
+      <EntityTypeMapping TypeName="musicAppDBModel.AgrupacionExterna">
+        <MappingFragment StoreEntitySet="AgrupacionExterna">
+          <ScalarProperty Name="Id_agrupacion_externa" ColumnName="Id_agrupacion_externa" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Fecha_inicio" ColumnName="Fecha_inicio" />
+          <ScalarProperty Name="Fecha_fin" ColumnName="Fecha_fin" />
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comentario">
+      <EntityTypeMapping TypeName="musicAppDBModel.Comentario">
+        <MappingFragment StoreEntitySet="Comentario">
+          <ScalarProperty Name="Id_comentario" ColumnName="Id_comentario" />
+          <ScalarProperty Name="Comentario1" ColumnName="Comentario" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Id_post" ColumnName="Id_post" />
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Follow">
+      <EntityTypeMapping TypeName="musicAppDBModel.Follow">
+        <MappingFragment StoreEntitySet="Follow">
+          <ScalarProperty Name="id_follows" ColumnName="id_follows" />
+          <ScalarProperty Name="Id_follower" ColumnName="Id_follower" />
+          <ScalarProperty Name="Id_following" ColumnName="Id_following" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Like">
+      <EntityTypeMapping TypeName="musicAppDBModel.Like">
+        <MappingFragment StoreEntitySet="Like">
+          <ScalarProperty Name="Id_like" ColumnName="Id_like" />
+          <ScalarProperty Name="Id_post" ColumnName="Id_post" />
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Post">
+      <EntityTypeMapping TypeName="musicAppDBModel.Post">
+        <MappingFragment StoreEntitySet="Post">
+          <ScalarProperty Name="Id_post" ColumnName="Id_post" />
+          <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+          <ScalarProperty Name="Archivo_mp3" ColumnName="Archivo_mp3" />
+          <ScalarProperty Name="Fecha_creacion" ColumnName="Fecha_creacion" />
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Id_agrupacion" ColumnName="Id_agrupacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Solicitud">
+      <EntityTypeMapping TypeName="musicAppDBModel.Solicitud">
+        <MappingFragment StoreEntitySet="Solicitud">
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Id_agrupacion" ColumnName="Id_agrupacion" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="musicAppDBModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Token">
+      <EntityTypeMapping TypeName="musicAppDBModel.Token">
+        <MappingFragment StoreEntitySet="Token">
+          <ScalarProperty Name="Id_token" ColumnName="Id_token" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Expiracion" ColumnName="Expiracion" />
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="musicAppDBModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+          <ScalarProperty Name="Fecha_nac" ColumnName="Fecha_nac" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+          <ScalarProperty Name="Instrumentos_fav" ColumnName="Instrumentos_fav" />
+          <ScalarProperty Name="Genero_musical_fav" ColumnName="Genero_musical_fav" />
+          <ScalarProperty Name="Es_cantante" ColumnName="Es_cantante" />
+          <ScalarProperty Name="Estado_en_banda_concierto" ColumnName="Estado_en_banda_concierto" />
+          <ScalarProperty Name="Desc_personal" ColumnName="Desc_personal" />
+          <ScalarProperty Name="Foto_perfil" ColumnName="Foto_perfil" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
