@@ -1,0 +1,29 @@
+﻿h1, h2, p, input, label {
+    color: #000000;
+}
+
+h1 {
+    font-size: 34px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+strong {
+    font-size: 15px;
+    padding-left: 8px;
+}
+
+a {
+    color: #C158DC;
+}
+
+a:hover {
+    color: #5F1872;
+}
+

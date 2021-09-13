@@ -1,0 +1,578 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Principal.master.cs" Inherits="MusicApp.Principal" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet"/>
+    <!-- my main css sheet -->
+    <link rel="stylesheet" href="assets/css/main.css" />
+
+    <asp:ContentPlaceHolder ID="css" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <style>
+        html {
+            visibility: hidden;
+        }
+
+        .navbar {
+            border-bottom: 1px solid #808080;
+            position: relative;
+            width: 100%;
+            padding: 0;
+        }
+
+        .search {
+            border-radius: 50px;
+            background: url(assets/icons/search.svg) no-repeat scroll 7px 7px;
+            padding-left: 35px;
+            max-width: 220px;
+        }
+
+        .navItem {
+            min-height: 50px;
+            min-width: 50px;
+            padding: 8px;
+        }
+
+        .activePage {
+            background-color: #CBADD5;
+        }
+
+        .postContainer {
+            background-color: white;
+            border: 1px solid;
+            border-color: black;
+        }
+
+        .makePost {
+            background-color: #white;
+            border: 1px solid;
+            border-color: black;
+        }
+
+        .profileComment {
+            background-color: white;
+            border-top: 1px solid;
+            border-color: black;
+            min-height: 80px
+        }
+
+        .postComment {
+            background-color: #EEEBEF;
+            border-top: 1px solid;
+            border-color: black;
+        }
+
+        .postCommentContent {
+            background-color: #F9F9F9;
+            min-height: 70px;
+            border: 1px solid;
+            border-color: black;
+        }
+
+        .postContent {
+            background-color: white;
+            min-height: 80px;
+            border: 1px solid;
+            border-color: black;
+        }
+
+        .writeComment {
+            height: 70px;
+            background-color: #F7F7F7;
+            border: 1px solid;
+        }
+
+        .primary-button {
+            border-radius: 50px;
+            height: 32px;
+            width: 80px;
+            font-size: 14px;
+            background-color: #8E24AA;
+            color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.40), 0 1px 2px rgba(0,0,0,0.40);
+        }
+
+            .primary-button:hover {
+                color: white;
+            }
+
+        .secondary-button {
+            border-radius: 50px;
+            height: 32px;
+            width: 90px;
+            font-size: 14px;
+            background-color: #A776B7;
+            color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.40), 0 1px 2px rgba(0,0,0,0.40);
+        }
+
+        .ola {
+            display: none;
+        }
+
+        .navbar-toggler.toggler-example {
+            cursor: pointer;
+        }
+
+        .hamburger {
+            display: none;
+            height: 246px;
+            margin-left: 220px;
+            font-size: 31px;
+            text-align: center;
+        }
+
+        .logoSearch {
+            display: none !important;
+        }
+
+        .fotoPost {
+            background-image: url("assets/profiles/face.jpg");
+            background-position: center;
+            background-size: cover;
+            border-radius: 50%;
+        }
+
+        .container-audio {
+            margin: 9px auto;
+            min-width: 100px;
+        }
+
+        .container-fluid {
+            padding-right: 0px;
+            padding-left: 0px;
+        }
+
+        .row {
+            margin-right: 0px;
+            margin-left: 0px;
+        }
+
+        audio {
+            width: 100%;
+        }
+
+        @media (max-width: 400px) {
+            .search {
+                display: none;
+            }
+        }
+
+        @media (max-width: 780px) {
+            .ola {
+                display: block;
+            }
+
+            .bai {
+                display: none !important;
+            }
+        }
+
+        @media (min-width: 1535px) {
+            .col-xl-9 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 75% !important;
+                flex: 0 0 75% !important;
+                max-width: 75% !important;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .col-xl-9 {
+                flex: none;
+                max-width: none;
+            }
+        }
+
+        .switchToggle input[type=checkbox] {
+            height: 0;
+            width: 0;
+            visibility: hidden;
+            position: absolute;
+        }
+
+        label {
+            margin-bottom: 0px;
+        }
+
+        .switchToggle label {
+            cursor: pointer;
+            text-indent: -9999px;
+            width: 70px;
+            max-width: 70px;
+            height: 32px;
+            border: 1px solid #808080;
+            background: #CBADD5;
+            display: block;
+            border-radius: 100px;
+            position: relative;
+        }
+
+            .switchToggle label:after {
+                content: '';
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                width: 26px;
+                height: 26px;
+                background: white;
+                border-radius: 90px;
+                transition: 0.3s;
+            }
+
+        .switchToggle input:checked + label, .switchToggle input:checked + input + label {
+            background: #A776B7;
+        }
+
+        .switchToggle input + label:before, .switchToggle input + input + label:before {
+            content: 'No';
+            position: absolute;
+            top: 5px;
+            left: 35px;
+            width: 26px;
+            height: 26px;
+            border-radius: 90px;
+            transition: 0.3s;
+            text-indent: 0;
+            color: black;
+        }
+
+        .switchToggle input:checked + label:before, .switchToggle input:checked + input + label:before {
+            content: 'Si';
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            width: 26px;
+            height: 26px;
+            border-radius: 90px;
+            transition: 0.3s;
+            text-indent: 0;
+            color: #fff;
+        }
+
+        .switchToggle input:checked + label:after, .switchToggle input:checked + input + label:after {
+            left: calc(100% - 2px);
+            transform: translateX(-100%);
+        }
+
+        .switchToggle label:active:after {
+            width: 60px;
+        }
+
+        .toggle-switchArea {
+            margin: 10px 0 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-light bg-white d-flex justify-content-between">
+            <div class="pl-3 d-flex" id="logo">
+                <a class="navbar-brand <%= (url.Contains("home"))?"activePage":"" %> p-2" href="/home" id="home">
+                    <img src="/assets/img/logo.png" width="50" height="50" alt="" ">
+                </a>
+                <div class="form-inline position-relative">
+                    <input id="searchFilter" class="form-control mr-sm-2 search" type="search" placeholder="Search" aria-label="Search" value="">
+                    <span style="display:contents" id="searchUsers">
+                    </span>
+                        
+                </div>
+            </div>
+            <div class="d-flex justify-content-around bai">
+                <div class="mr-4 navItem  <%= (url.Contains("grupacion"))?"activePage":"" %>" id="group">
+                    <a href="/listaAgrupaciones">
+                        <img src="/assets/icons/groups.svg" width="50" height="50" alt="" onclick="isActive('group')">
+                    </a>
+                </div>
+                <div class="mr-5 ml-2 navItem  <%= (url.Contains("suario"))?"activePage":"" %>" id="profile">
+                    <a style="cursor: pointer" onclick="redirect('perfilUsuario')" >
+                        <div id="fotoUsuario" class="fotoPost" style="width: 50px; height: 50px; ">
+                        </div>
+                    </a>
+                </div>
+                <div class="mr-5 ml-5 navItem">
+                    <a href="/login">
+                        <img src="/assets/icons/logout.svg" width="50" height="50" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="hamburger" id="celphone-links">
+                <div class="p-2 ">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href="# ">Inicio</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="#">Agrupaciones</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="#">perfil</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button class="navbar-toggler mr-4 ola" type="button" onclick="hamburger()">
+                <img src="assets/icons/hamburger.svg" />
+            </button>
+
+
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script>
+        $(document).ready(function () {
+            var token = localStorage.getItem("token");
+            var activeUser = localStorage.getItem("Id_usuario");
+            console.log("token: " + token);
+
+            var data = JSON.stringify({ token: token })
+            $.ajax({
+                type: "POST",
+                url: "home.aspx/validarToken",
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+
+                success: function (response) {
+                    if (response.d == "Token invalido" || response.d.search("error") != -1) {
+                        localStorage.clear();
+                        window.location.href = "login.aspx";
+                    } else {
+                        document.getElementsByTagName("html")[0].style.visibility = "visible";
+                    }
+                },
+                failure: function (response) {
+                    //alert(response.d);
+                    toast = '<span class="toast-yellow">Se produjo un error, intenta de nuevo<span>';
+                    M.toast({ html: toast });
+
+                }
+            });
+
+            var data = JSON.stringify({
+                Id_usuario: activeUser
+            })
+
+            $.ajax({
+                type: "POST",
+                url: "perfilUsuario.aspx/getActiveUser",
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+
+                success: function (response) {
+                    console.log(response.d);
+                    $('#fotoUsuario').css("background-image", "url('" + response.d + "')");
+                },
+                failure: function (response) {
+                    //alert(response.d);
+                    console.log('cc');
+                    toast = '<span class="toast-yellow">Se produjo un error, intenta de nuevo<span>';
+                    M.toast({ html: toast });
+
+                }
+            });
+
+            $('#searchFilter').on('keyup', function (e) {
+                //get the file name
+                var f = "" + $(this).val();
+                if (e.which == 13) {
+
+                    var data = JSON.stringify({
+                        filter: f
+                    })
+
+                    $.ajax({
+                        type: "POST",
+                        url: "home.aspx/getFilter",
+                        data: data,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+
+                        success: function (response) {
+                            console.log("aaaa: " + response.d);
+                            var json = JSON.parse(response.d);
+                            var spaan = $('#searchUsers');
+                            spaan.empty();
+                            var marge = 86;
+                            $.each(json, function (i, elem) {
+                                spaan.append("<div class='d-flex align-items-center position-absolute' style='border: 1px solid; border-top: 0px; height: 38px; background-color: white; width: 220px; margin-top:" + marge + "px; z-index: 101; opacity: 95%; cursor: pointer'> <a class='d-flex align-items-center' href='/perfilUsuario.aspx?Usuario=" + json[i].Id_usuario +"'> <div class='fotoPost ml-2' style='width: 20px; height: 23px; background-image: url(" + json[i].Foto_perfil + " )'></div> <p class='ml-3 mr-2' style='margin-bottom: 0px; font-size: 14px'>" + json[i].Nombre + " " + json[i].Apellidos + "</p> </a> </div >");
+                                marge += 76;
+                            });
+
+                            //var json = JSON.parse(response.d);
+                            //console.log("ae " + json);
+                        },
+                        failure: function (response) {
+                            //alert(response.d);
+                            toast = '<span class="toast-yellow">Se produjo un error, intenta de nuevo<span>';
+                            M.toast({ html: toast });
+
+                        }
+                    });
+                }
+            });
+
+        });
+
+        function redirect(a) {
+            var curUsuario = localStorage.getItem("Id_usuario");
+            window.location.href = "" + a + ".aspx?Usuario=" + curUsuario
+        }
+
+        function hamburger() {
+            var x = document.getElementById("celphone-links");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+                $("#logo").removeClass("logoSearch");
+            } else {
+                x.style.display = "block";
+                $("#logo").addClass("logoSearch");
+            }
+        }
+
+        function onLike(like) {
+            var x = document.getElementById(like);
+            var curUsuario = localStorage.getItem("Id_usuario");
+            var y = String('#' + like);
+            var y2 = String('#' + like + 'd');
+
+
+            Id_post = like.substring(4);
+
+            var data = JSON.stringify({
+                Id_post: Id_post, Id_usuario: curUsuario
+            })
+
+            if (x.style.display === "block") {
+                $.ajax({
+                    type: "POST",
+                    url: "perfilUsuario.aspx/registerLike",
+                    data: data,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+
+                    success: function (response) {
+                        $("#interactionIcons" + Id_post).load(" #interactionIcons" + Id_post + "> *");
+                        console.log(response.d);
+                    },
+                    failure: function (response) {
+                        //alert(response.d);
+                        toast = '<span class="toast-yellow">Se produjo un error, intenta de nuevo<span>';
+                        M.toast({ html: toast });
+
+                    }
+                });
+
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "perfilUsuario.aspx/deleteLike",
+                    data: data,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+
+                    success: function (response) {
+                        $("#interactionIcons" + Id_post).load(" #interactionIcons" + Id_post + "> *");
+                        console.log(response.d);
+                    },
+                    failure: function (response) {
+                        //alert(response.d);
+                        toast = '<span class="toast-yellow">Se produjo un error, intenta de nuevo<span>';
+                        M.toast({ html: toast });
+
+                    }
+                });
+            }
+        }
+
+        function onChat(chat) {
+
+            var x = document.getElementById("closedChat" + chat);
+            if (x.style.display === "block") {
+                $("#closedChat" + chat).hide();
+                $("#openedChat" + chat).show();
+                $("#comments" + chat).show("slow");
+            } else {
+                $("#closedChat" + chat).show();
+                $("#openedChat" + chat).hide();
+                $("#comments" + chat).hide("slow");
+            }
+        }
+
+
+        function setMessage(Id_post) {
+            var curUsuario = localStorage.getItem("Id_usuario");
+            var content = $('#createMessage' + Id_post).val();
+            $('#createMessage' + Id_post).val('');
+
+            var data = JSON.stringify({
+                Id_post: Id_post, Id_usuario: curUsuario, Comentario1: content
+            })
+
+            $.ajax({
+                type: "POST",
+                url: "perfilUsuario.aspx/registerComment",
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+
+                success: function (response) {
+                    $("#comments" + Id_post).load(" #comments" + Id_post + "> *");
+                    console.log(response.d);
+                },
+                failure: function (response) {
+                    //alert(response.d);
+                    toast = '<span class="toast-yellow">Se produjo un error, intenta de nuevo<span>';
+                    M.toast({ html: toast });
+
+                }
+            });
+        }
+
+        function clearPostMessage() {
+            $('#postMessage').val('');
+            $('#customFileLang2').next('.custom-file-label').html('Choose mp3 file');
+        }
+
+        function checkSwitch(name) {
+            var s = $("#" + name).val();
+            if (s == "on") {
+                document.getElementById(name).value = "off";
+            }
+            else {
+                document.getElementById(name).value = "on";
+            }
+        }
+    </script>
+    <asp:ContentPlaceHolder ID="script" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>
